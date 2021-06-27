@@ -1,5 +1,5 @@
 CC=clang
-CFLAGS=-Os -flto=thin
+CFLAGS=-D_FORTIFY_SOURCE=2 -fpie -fPIC -fstack-protector-all -Os -flto=thin
 rule compile
     command = $CC $CFLAGS -c $in -o $out
 rule link
