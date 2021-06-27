@@ -1,0 +1,8 @@
+CC=clang
+CFLAGS=-Os -flto=thin
+rule compile
+    command = $CC $CFLAGS -c $in -o $out
+rule link
+    command = $CC $CFLAGS $in -o $out
+build ./build/main.o: compile ./src/main.c
+build app: link ./build/main.o
