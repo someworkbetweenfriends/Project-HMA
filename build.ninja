@@ -1,8 +1,9 @@
 CC=clang
-CFLAGS=-D_FORTIFY_SOURCE=2 -fpie -fPIC -fstack-protector-all -Os -flto=thin -Weverything
+CFLAGS = -D_FORTIFY_SOURCE=2 -fpie -fPIC -fstack-protector-all -Os -flto=thin -Weverything
+LDFLAGS = -lcurl
 rule compile
     command = $CC $CFLAGS -c $in -o $out
 rule link
-    command = $CC $CFLAGS $in -o $out
+    command = $CC $CFLAGS $LDFLAGS $in -o $out
 build ./build/main.o: compile ./src/main.c
 build app: link ./build/main.o
