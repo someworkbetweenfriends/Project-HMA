@@ -1,5 +1,5 @@
 CC=clang
-CFLAGS = -D_FORTIFY_SOURCE=2 -fpie -fPIC -fstack-protector-all -Os -flto=thin -Weverything
+CFLAGS = -D_FORTIFY_SOURCE=2 -fpie -fPIC -fstack-protector-all -Os -flto=thin -Weverything -pedantic
 LDFLAGS = -lcurl
 rule compile
     command = $CC $CFLAGS -c $in -o $out
