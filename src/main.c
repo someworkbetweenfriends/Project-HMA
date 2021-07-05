@@ -4,16 +4,20 @@
 #include<sys/socket.h>
 #include<arpa/inet.h>
 #include<unistd.h>
+static short SocketCreate(void);
+static int SocketConnect(int hSocket);
+static int SocketSend(int hSocket,char* Rqst,short lenRqst);
+static int SocketReceive(int hSocket,char* Rsp,short RvcSize);
 //Create a Socket for server communication
 short SocketCreate(void)
 {
     short hSocket;
-    printf("Created the socket\n");
-    hSocket = socket(AF_INET, SOCK_STREAM, 0);
+    printf("Creating the socket\n");
+    hSocket = (short) socket(AF_INET, SOCK_STREAM, 0);
     return hSocket;
 }
 //try to connect with server
-int SocketConnect(int hSocket)
+static int SocketConnect(int hSocket)
 {
     int iRetval=-1;
     int ServerPort = 80;
@@ -25,7 +29,7 @@ int SocketConnect(int hSocket)
     return iRetval;
 }
 // Send the data to the server and set the timeout of 20 seconds
-int SocketSend(int hSocket,char* Rqst,short lenRqst)
+static int SocketSend(int hSocket,char* Rqst,short lenRqst)
 {
     int shortRetval = -1;
     struct timeval tv;
@@ -40,7 +44,7 @@ int SocketSend(int hSocket,char* Rqst,short lenRqst)
     return shortRetval;
 }
 //receive the data from the server
-int SocketReceive(int hSocket,char* Rsp,short RvcSize)
+static int SocketReceive(int hSocket,char* Rsp,short RvcSize)
 {
     int shortRetval = -1;
     struct timeval tv;
